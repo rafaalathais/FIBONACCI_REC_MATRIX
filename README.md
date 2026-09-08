@@ -3,6 +3,7 @@
 ### Pré-requisitos:
 * Python
 * Biblioteca NumPy
+* Biblioteca Matplotlib
 
 ### Executando Testes:
 
@@ -10,9 +11,9 @@ Para rodar os testes, primeiramente, baixe `main.py`, depois pelo terminal vá a
 
 Windows:
 ```bash
-  python -m unittest main.py
+  py main.py
 ```
 Mac/Linux:
 ```bash
-  python3 -m unittest main.py
+  python3 main.py
 ```
