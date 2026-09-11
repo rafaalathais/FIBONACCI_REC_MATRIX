@@ -48,32 +48,52 @@ for i in range(QTD_ENTRADAS):
     print(f"Fibonacci({n}) = {resultado}, Tempo: {tempo:.6f} milisegundos")
 
 
-#---Desenhando o gráfico---
+#--- DESENHANDO GRÁFICOS ---
+plt.figure(figsize=(10, 6))
 
+# Valores do eixo x
 valores_n = np.arange(n_inicial, n_inicial + QTD_ENTRADAS * AUMENTO, AUMENTO)
 valores_n_seguro = np.clip(valores_n, 1e-9, None)  #Evita o zero no log
 
-# Complexidades teóricas - Multiplicamos por constantes pequenas para fins de escala no mesmo eixo gráfico
-complexidade_log = np.log2(valores_n_seguro) * 0.0001 
-complexidade_exp = 2**valores_n * 0.00001
-
-plt.figure(figsize=(10, 6))
-
 # Plotando os dados reais obtidos nos testes
+
 plt.plot(valores_n, tempos_matriz, 'b-o', label='Fibonacci com Matriz (Tempo Real)', linewidth=2)
 plt.plot(valores_n, tempos_recursivo, 'r-o', label='Fibonacci Recursivo (Tempo Real)', linewidth=2)
 
+
+# GRÁFICO 1 - Tempo de execução × tamanho da entrada n --------------------------------
+
+#Complexidades teóricas - Multiplicamos por constantes pequenas para fins de escala no mesmo eixo gráfico
+
+complexidade_log = np.log2(valores_n_seguro) * 0.0001 
+complexidade_exp = 2**valores_n * 0.00001
+
 # Plotando as curvas teóricas de Notação Big-O
+
 plt.plot(valores_n, complexidade_log, 'b--', label='Teórico: $O(\\log n)$', alpha=0.7)
 plt.plot(valores_n, complexidade_exp, 'r--', label='Teórico: $O(2^n)$', alpha=0.7)
+plt.title('Comparação entre Análise teórica e empírica')
+plt.xlabel('Tamanho da Entrada (n) - Escala log Y')
+plt.ylabel('Tempo de Execução (ms)')
+
+# GRÁFICO 2 --------------------------------
+
+#CALCULO DO NUMERO DE OPERAÇÕES 
+'''
+custo_matriz_log = np.log2(valores_n_seguro) # Custo teórico para Fibonacci com matriz
+custo_recursivo_exp = 2.0**valores_n   # Custo teórico para Fibonacci recursivo
+plt.plot(valores_n, custo_matriz_log, 'b-o', label='Fibonacci com Matriz (Tempo Real)', linewidth=2)
+plt.plot(valores_n, custo_recursivo_exp, 'r-o', label='Fibonacci Recursivo (Tempo Real)', linewidth=2)
+plt.xlabel('Tamanho da Entrada (n)')
+plt.ylabel('Custo de crescimento teórico (número de operações)')
+'''
+
 
 # Configurações cruciais de escala e legendas
 plt.yscale('log') # Escala Logarítmica para juntar O(log n) e O(2^n) perfeitamente
-plt.title('Comparação entre Análise teórica e empírica')
-plt.xlabel('Tamanho da Entrada (n)')
-plt.ylabel('Tempo de Execução (ms) - Escala Log Y')
+plt.title('Comparação entre Fibonnaci recursivo e com matriz')
 plt.grid(True, which="both", linestyle='--', alpha=0.5)
 plt.legend(loc='upper left')
 
-# Exibe a janela com as 4 linhas juntas
+# Exibe na janela 
 plt.show()

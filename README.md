@@ -1,7 +1,7 @@
 # Análise de desempenho: Fibonacci Recursivo x Fibonacci com Matriz
 ## Como rodar o programa
 ### Pré-requisitos:
-* Python
+* Python 3
 * Biblioteca NumPy
 * Biblioteca Matplotlib
 
